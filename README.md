@@ -1,2 +1,3 @@
-# apollo-mission2-crud
-CRUD with advanced techniques using typescript, express, mongodb and mongoose.
+# CRUD using typescript, mongoose and express js.
+
+- route -> controller -> service -> model -> schema -> database -> response -> view
