@@ -1,3 +1,4 @@
+import { rainbow, red } from 'colors';
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config';
@@ -8,11 +9,13 @@ async function main() {
 
     app.listen(config.port, () => {
       console.log(
-        `Connected to databse and app is running on port ${config.port}`
+        rainbow(
+          `Connected to databse and app is running on port ${config.port}`
+        ).bold
       );
     });
   } catch (err) {
-    console.log(err);
+    console.log(red(`Error: ${err}`).bold);
   }
 }
 
