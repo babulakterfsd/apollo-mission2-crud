@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import validator from 'validator';
 import { Guardian, LocalGuardian, Name, Student } from './student.interface';
 
 const nameSchema = new Schema<Name>({
@@ -16,10 +17,12 @@ const nameSchema = new Schema<Name>({
     //custom validator
     validate: {
       validator: function (value: string) {
-        const firstNameStr = value.charAt(0).toUpperCase() + value.slice(1);
+        const firstNameStr =
+          value.charAt(0).toUpperCase() + value.slice(1).toLocaleLowerCase();
         return firstNameStr === value;
       },
-      message: '{VALUE} is not capitalized. Please capitalize the first letter',
+      message:
+        '{VALUE} is not valid. Please capitalize the first letter and rest small',
     },
   },
   middleName: {
@@ -31,6 +34,11 @@ const nameSchema = new Schema<Name>({
     minlength: [3, 'Last name should be atleast 3 characters long'],
     maxlength: [20, 'Last name should not be more than 20 characters long'],
     trim: true,
+    //validate using validator package
+    validate: {
+      validator: (value: string) => validator.isAlpha(value),
+      message: '{VALUE} is not valid. Lastname cant contain any numeric value',
+    },
   },
 });
 
@@ -124,7 +132,13 @@ const studentSchema = new Schema<Student>({
     type: String,
     required: [true, 'Email is required'],
     unique: true,
-    match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email address'],
+    //validate using regex
+    // match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email address'],
+    //validate using validator package
+    validate: {
+      validator: (value: string) => validator.isEmail(value),
+      message: '{VALUE} is not a valid email address',
+    },
   },
   contactNumber: {
     type: String,
