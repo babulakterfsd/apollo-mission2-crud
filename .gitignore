@@ -2,6 +2,8 @@
 node_modules/
 
 # TypeScript
+*.js
+*.js.map
 *.d.ts
 *.tsbuildinfo
 
@@ -17,6 +19,10 @@ node_modules/
 # Logs
 logs/
 *.log
+
+# Build results
+dist/
+build/
 
 # Environment variables
 .env
