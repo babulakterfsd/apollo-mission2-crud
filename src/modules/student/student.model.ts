@@ -8,6 +8,11 @@ const nameSchema = new Schema<Name>({
     minlength: [3, 'First name should be atleast 3 characters long'],
     maxlength: [20, 'First name should not be more than 20 characters long'],
     trim: true,
+    validate: function (value: string) {
+      //whatever user inputs, it will be converted to first letter capital and rest small
+      this.firstName =
+        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    },
   },
   middleName: {
     type: String,
