@@ -5,6 +5,7 @@ const nameSchema = new Schema<Name>({
   firstName: {
     type: String,
     required: [true, 'First name is required'],
+    minlength: [3, 'First name should be atleast 3 characters long'],
   },
   middleName: {
     type: String,
@@ -12,6 +13,7 @@ const nameSchema = new Schema<Name>({
   lastName: {
     type: String,
     required: [true, 'Last name is required'],
+    minlength: [3, 'Last name should be atleast 3 characters long'],
   },
 });
 
@@ -19,6 +21,7 @@ const guardianSchema = new Schema<Guardian>({
   fatherName: {
     type: String,
     required: [true, 'Father name is required'],
+    minlength: [3, 'Father name should be atleast 3 characters long'],
   },
   fatherOccupation: {
     type: String,
@@ -31,6 +34,7 @@ const guardianSchema = new Schema<Guardian>({
   motherName: {
     type: String,
     required: [true, 'Mother name is required'],
+    minlength: [3, 'Mother name should be atleast 3 characters long'],
   },
   motherOccupation: {
     type: String,
@@ -46,6 +50,7 @@ const localGuardianSchema = new Schema<LocalGuardian>({
   name: {
     type: String,
     required: [true, 'Local guardian name is required'],
+    minlength: [3, 'Local guardian name should be atleast 3 characters long'],
   },
   occupation: {
     type: String,
@@ -58,10 +63,19 @@ const localGuardianSchema = new Schema<LocalGuardian>({
   address: {
     type: String,
     required: [true, 'Local guardian address is required'],
+    minlength: [
+      3,
+      'Local guardian address should be atleast 3 characters long',
+    ],
   },
 });
 
 const studentSchema = new Schema<Student>({
+  id: {
+    type: String,
+    required: [true, 'Id is required'],
+    unique: true,
+  },
   name: {
     type: nameSchema,
     required: [true, 'Name is required'],
@@ -70,7 +84,7 @@ const studentSchema = new Schema<Student>({
     type: String,
     enum: {
       values: ['male', 'female', 'others'],
-      message: 'Gender is either male or female or other.',
+      message: 'Gender is either male or female or other. you provided {VALUE}',
     },
     required: [true, 'gender is required'],
   },
@@ -80,6 +94,8 @@ const studentSchema = new Schema<Student>({
   email: {
     type: String,
     required: [true, 'Email is required'],
+    unique: true,
+    match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email address'],
   },
   contactNumber: {
     type: String,
@@ -93,7 +109,8 @@ const studentSchema = new Schema<Student>({
     type: String,
     enum: {
       values: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
-      message: 'Blood group is either: A+, A-, B+, B-, O+, O-, AB+, AB-',
+      message:
+        'Blood group is either: A+, A-, B+, B-, O+, O-, AB+, AB- . you provided {VALUE}',
     },
   },
   presentAddress: {
@@ -119,7 +136,7 @@ const studentSchema = new Schema<Student>({
     type: String,
     enum: {
       values: ['active', 'blocked'],
-      message: 'Status is either: active or blocked',
+      message: 'Status is either: active or blocked. you provided {VALUE}',
     },
     default: 'active',
   },
