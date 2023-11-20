@@ -6,6 +6,7 @@ const nameSchema = new Schema<Name>({
     type: String,
     required: [true, 'First name is required'],
     minlength: [3, 'First name should be atleast 3 characters long'],
+    maxlength: [20, 'First name should not be more than 20 characters long'],
   },
   middleName: {
     type: String,
@@ -14,6 +15,7 @@ const nameSchema = new Schema<Name>({
     type: String,
     required: [true, 'Last name is required'],
     minlength: [3, 'Last name should be atleast 3 characters long'],
+    maxlength: [20, 'Last name should not be more than 20 characters long'],
   },
 });
 
@@ -22,6 +24,7 @@ const guardianSchema = new Schema<Guardian>({
     type: String,
     required: [true, 'Father name is required'],
     minlength: [3, 'Father name should be atleast 3 characters long'],
+    maxlength: [20, 'Father name should not be more than 20 characters long'],
   },
   fatherOccupation: {
     type: String,
@@ -35,6 +38,7 @@ const guardianSchema = new Schema<Guardian>({
     type: String,
     required: [true, 'Mother name is required'],
     minlength: [3, 'Mother name should be atleast 3 characters long'],
+    maxlength: [20, 'Mother name should not be more than 20 characters long'],
   },
   motherOccupation: {
     type: String,
@@ -51,6 +55,10 @@ const localGuardianSchema = new Schema<LocalGuardian>({
     type: String,
     required: [true, 'Local guardian name is required'],
     minlength: [3, 'Local guardian name should be atleast 3 characters long'],
+    maxlength: [
+      20,
+      'Local guardian name should not be more than 20 characters long',
+    ],
   },
   occupation: {
     type: String,
@@ -66,6 +74,10 @@ const localGuardianSchema = new Schema<LocalGuardian>({
     minlength: [
       3,
       'Local guardian address should be atleast 3 characters long',
+    ],
+    maxlength: [
+      20,
+      'Local guardian address should not be more than 20 characters long',
     ],
   },
 });
@@ -117,11 +129,19 @@ const studentSchema = new Schema<Student>({
     type: String,
     required: [true, 'Present address is required'],
     minlength: [3, 'Present address should be atleast 3 characters long'],
+    maxlength: [
+      20,
+      'Present address should not be more than 20 characters long',
+    ],
   },
   permanentAddress: {
     type: String,
     required: [true, 'Permanent address is required'],
     minlength: [3, 'Permanent address should be atleast 3 characters long'],
+    maxlength: [
+      20,
+      'Permanent address should not be more than 20 characters long',
+    ],
   },
   guardian: {
     type: guardianSchema,
