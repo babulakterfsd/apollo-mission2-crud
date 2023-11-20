@@ -7,6 +7,7 @@ const nameSchema = new Schema<Name>({
     required: [true, 'First name is required'],
     minlength: [3, 'First name should be atleast 3 characters long'],
     maxlength: [20, 'First name should not be more than 20 characters long'],
+    trim: true,
   },
   middleName: {
     type: String,
@@ -16,6 +17,7 @@ const nameSchema = new Schema<Name>({
     required: [true, 'Last name is required'],
     minlength: [3, 'Last name should be atleast 3 characters long'],
     maxlength: [20, 'Last name should not be more than 20 characters long'],
+    trim: true,
   },
 });
 
@@ -25,6 +27,7 @@ const guardianSchema = new Schema<Guardian>({
     required: [true, 'Father name is required'],
     minlength: [3, 'Father name should be atleast 3 characters long'],
     maxlength: [20, 'Father name should not be more than 20 characters long'],
+    trim: true,
   },
   fatherOccupation: {
     type: String,
@@ -39,6 +42,7 @@ const guardianSchema = new Schema<Guardian>({
     required: [true, 'Mother name is required'],
     minlength: [3, 'Mother name should be atleast 3 characters long'],
     maxlength: [20, 'Mother name should not be more than 20 characters long'],
+    trim: true,
   },
   motherOccupation: {
     type: String,
