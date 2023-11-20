@@ -116,10 +116,12 @@ const studentSchema = new Schema<Student>({
   presentAddress: {
     type: String,
     required: [true, 'Present address is required'],
+    minlength: [3, 'Present address should be atleast 3 characters long'],
   },
   permanentAddress: {
     type: String,
     required: [true, 'Permanent address is required'],
+    minlength: [3, 'Permanent address should be atleast 3 characters long'],
   },
   guardian: {
     type: guardianSchema,
