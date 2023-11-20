@@ -13,6 +13,7 @@ const nameSchema = new Schema<Name>({
     //   this.firstName =
     //     value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     // },
+    //custom validator
     validate: {
       validator: function (value: string) {
         const firstNameStr = value.charAt(0).toUpperCase() + value.slice(1);
