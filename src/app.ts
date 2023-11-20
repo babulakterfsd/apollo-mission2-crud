@@ -15,7 +15,8 @@ app.use('/api/v1/teachers', TeacherRoute);
 
 app.get('/', (req: Request, res: Response) => {
   res.json({
-    message: 'Welcome to curd project of apollo b2 with Babul Akter',
+    message:
+      'Welcome to curd project of next level development batch 2 with Babul Akter',
   });
 });
 
