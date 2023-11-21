@@ -9,5 +9,14 @@ router.get(
   '/get-single-student/:studentId',
   StudentControllers.getSingleStudent
 );
+router.delete(
+  '/delete-single-student/:studentId',
+  StudentControllers.deleteSingleStudent
+);
+
+router.put(
+  '/update-single-student/:studentId',
+  StudentControllers.updateSingleStudent
+);
 
 export const StudentRoute = router;

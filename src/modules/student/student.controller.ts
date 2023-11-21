@@ -55,8 +55,51 @@ const getSingleStudent = async (req: Request, res: Response) => {
   }
 };
 
+const updateSingleStudent = async (req: Request, res: Response) => {
+  try {
+    const { studentId } = req.params;
+    const { student: studentDataToBeUpdated } = req.body;
+    const result = await StudentServices.updateSingleStudentInTheDB(
+      studentId,
+      studentDataToBeUpdated
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: result,
+      message: 'Student has been updated succesfully',
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      status: 'error',
+      message: err.message,
+    });
+  }
+};
+
+const deleteSingleStudent = async (req: Request, res: Response) => {
+  try {
+    const { studentId } = req.params;
+
+    const result = await StudentServices.deleteSingleStudentFromDB(studentId);
+
+    res.status(200).json({
+      status: 'success',
+      data: result,
+      message: 'Student has been deleted succesfully',
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      status: 'error',
+      message: err.message,
+    });
+  }
+};
+
 export const StudentControllers = {
   createStudent,
   getAllStudents,
   getSingleStudent,
+  deleteSingleStudent,
+  updateSingleStudent,
 };

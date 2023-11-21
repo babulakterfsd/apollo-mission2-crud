@@ -34,7 +34,31 @@ const getAllStudentsFromDB = async () => {
 };
 
 const getSingleStudentFromDB = async (id: string) => {
-  const result = await StudentModel.find({ id: id });
+  //get single student by find method
+  // const result = await StudentModel.find({ id: id });
+  // return result;
+
+  //get single student by aggregation
+  const result = await StudentModel.aggregate([
+    {
+      $match: {
+        id: id,
+      },
+    },
+  ]);
+  return result;
+};
+
+const updateSingleStudentInTheDB = async (
+  id: string,
+  studentDataToBeUpdated: TStudent
+) => {
+  const result = await StudentModel.updateOne({ id }, studentDataToBeUpdated);
+  return result;
+};
+
+const deleteSingleStudentFromDB = async (id: string) => {
+  const result = await StudentModel.updateOne({ id }, { isDeleted: true });
   return result;
 };
 
@@ -42,4 +66,6 @@ export const StudentServices = {
   createStudentInTheDB,
   getAllStudentsFromDB,
   getSingleStudentFromDB,
+  deleteSingleStudentFromDB,
+  updateSingleStudentInTheDB,
 };
