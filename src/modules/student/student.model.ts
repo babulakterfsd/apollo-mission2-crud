@@ -1,5 +1,7 @@
+import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
 import validator from 'validator';
+import config from '../../config';
 import {
   TGuardian,
   TLocalGuardian,
@@ -124,6 +126,12 @@ const studentSchema = new Schema<TStudent, TStudentModel>({
     type: nameSchema,
     required: [true, 'Name is required'],
   },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    minlength: [8, 'Password should be atleast 8 characters long'],
+    maxlength: [20, 'Password should not be more than 20 characters long'],
+  },
   gender: {
     type: String,
     enum: {
@@ -200,6 +208,22 @@ const studentSchema = new Schema<TStudent, TStudentModel>({
     },
     default: 'active',
   },
+});
+
+//pre save middleware / hook (will run before saving / creating the document)
+studentSchema.pre<TStudent>('save', async function (next) {
+  //hashing the password and saving it
+  this.password = await bcrypt.hash(
+    this.password,
+    Number(config.bcrypt_salt_rounds)
+  );
+
+  next();
+});
+
+//post save middleware / hook (will run after saving / creating the document)
+studentSchema.post<TStudent>('save', function () {
+  console.log('post hook', this);
 });
 
 //creating a custom static method
