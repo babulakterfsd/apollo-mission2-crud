@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import { Model } from 'mongoose';
 
 export type TName = {
@@ -40,12 +41,18 @@ export type TStudent = {
   isActive: 'active' | 'blocked';
 };
 
-export interface TStudentMethods {
+//for creating statics
+export interface TStudentModel extends Model<TStudent> {
   isStudentExists(id: string): Promise<TStudent | null>;
 }
 
-export type TStudentModel = Model<
-  TStudent,
-  Record<string, never>,
-  TStudentMethods
->;
+//for creating instances
+// export interface TStudentMethods {
+//   isStudentExists(id: string): Promise<TStudent | null>;
+// }
+
+// export type TStudentModel = Model<
+//   TStudent,
+//   Record<string, never>,
+//   TStudentMethods
+// >;

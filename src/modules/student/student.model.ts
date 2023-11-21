@@ -5,7 +5,7 @@ import {
   TLocalGuardian,
   TName,
   TStudent,
-  TStudentMethods,
+  // TStudentMethods,
   TStudentModel,
 } from './student.interface';
 
@@ -114,7 +114,7 @@ const localGuardianSchema = new Schema<TLocalGuardian>({
   },
 });
 
-const studentSchema = new Schema<TStudent, TStudentModel, TStudentMethods>({
+const studentSchema = new Schema<TStudent, TStudentModel>({
   id: {
     type: String,
     required: [true, 'Id is required'],
@@ -202,11 +202,17 @@ const studentSchema = new Schema<TStudent, TStudentModel, TStudentMethods>({
   },
 });
 
-//custom instance method
-studentSchema.methods.isStudentExists = async function (id: string) {
+//creating a custom static method
+studentSchema.statics.isStudentExists = async function (id: string) {
   const existingStudent = await StudentModel.findOne({ id });
   return existingStudent;
 };
+
+//custom instance method
+// studentSchema.methods.isStudentExists = async function (id: string) {
+//   const existingStudent = await StudentModel.findOne({ id });
+//   return existingStudent;
+// };
 
 export const StudentModel = model<TStudent, TStudentModel>(
   'students',
