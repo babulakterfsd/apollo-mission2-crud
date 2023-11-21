@@ -1,10 +1,13 @@
-export type Name = {
+/* eslint-disable no-unused-vars */
+import { Model } from 'mongoose';
+
+export type TName = {
   firstName: string;
   middleName: string;
   lastName: string;
 };
 
-export type Guardian = {
+export type TGuardian = {
   fatherName: string;
   fatherOccupation: string;
   fatherContactNo: string;
@@ -13,16 +16,16 @@ export type Guardian = {
   motherContactNo: string;
 };
 
-export type LocalGuardian = {
+export type TLocalGuardian = {
   name: string;
   occupation: string;
   contactNo: string;
   address: string;
 };
 
-export type Student = {
+export type TStudent = {
   id: string;
-  name: Name;
+  name: TName;
   gender: 'male' | 'female';
   email: string;
   dateOfBirth: string;
@@ -31,8 +34,18 @@ export type Student = {
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'O-' | 'AB+' | 'AB-';
   presentAddress: string;
   permanentAddress: string;
-  guardian: Guardian;
-  localGuardian: LocalGuardian;
+  guardian: TGuardian;
+  localGuardian: TLocalGuardian;
   profileImg?: string;
   isActive: 'active' | 'blocked';
 };
+
+export interface TStudentMethods {
+  isStudentExists(id: string): Promise<TStudent | null>;
+}
+
+export type TStudentModel = Model<
+  TStudent,
+  Record<string, never>,
+  TStudentMethods
+>;
