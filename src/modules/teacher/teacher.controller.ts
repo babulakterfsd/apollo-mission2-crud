@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { TeacherServices } from './teacher.service';
+import teacherSchema from './teacher.validation';
 
 const createTeacher = async (req: Request, res: Response) => {
   try {
     const { teacher: teacherData } = req.body;
-    const result = await TeacherServices.createTeacherInTheDB(teacherData);
+    const zodParsedData = await teacherSchema.parseAsync(teacherData);
+    const result = await TeacherServices.createTeacherInTheDB(zodParsedData);
 
     res.status(200).json({
       status: 'success',

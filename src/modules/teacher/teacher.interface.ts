@@ -1,15 +1,15 @@
 export type Name = {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
 };
 
 export type Teacher = {
-  id: string;
+  id: number;
   name: Name;
-  gender: 'male' | 'female';
+  gender: 'male' | 'female' | 'other';
   email: string;
-  dateOfBirth: string;
+  dateOfBirth?: string;
   contactNumber: string;
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'O-' | 'AB+' | 'AB-';
   address: string;

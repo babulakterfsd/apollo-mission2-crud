@@ -44,9 +44,9 @@ const nameSchema = new Schema<Name>({
 
 const teacherSchema = new Schema<Teacher>({
   id: {
-    type: String,
+    type: Number,
     required: [true, 'Id is required'],
-    unique: true,
+    // unique: true,
   },
   name: {
     type: nameSchema,
@@ -66,7 +66,7 @@ const teacherSchema = new Schema<Teacher>({
   email: {
     type: String,
     required: [true, 'Email is required'],
-    unique: true,
+    // unique: true,
     //validate using regex
     // match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email address'],
     //validate using validator package
