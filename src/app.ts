@@ -15,8 +15,7 @@ app.use('/api/v1/teachers', TeacherRoute);
 
 app.get('/', (req: Request, res: Response) => {
   res.json({
-    message:
-      'Welcome to Student Management System API by Babul Akter. Testing before assignment 2',
+    message: 'Welcome to Student Management System API by Babul Akter.',
   });
 });
 
